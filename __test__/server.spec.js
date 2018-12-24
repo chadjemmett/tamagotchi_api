@@ -7,7 +7,6 @@ describe('server', () => {
     let response = await request(server).get('/')
     expect(response.status).toBe(200)
   })
-
 })
 
 
