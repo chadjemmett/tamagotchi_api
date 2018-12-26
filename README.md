@@ -18,3 +18,8 @@ This api is a simple backend to a tamagotchi-like game. When requested, this API
   8. Lights on?
   9. if eating, what type of food?
   10. ??
+
+Here's how it will work. A user creates a tamagotchi. It gets a name, a username. We do that with a post request. 
+It also gets a time stamp when it was created. It also gets a check in time. We save the username and the tamagotchi name to the db.
+After creation it sends back an object with all the data it needs. See above. It also has a check in time. The time that it last was updated. 
+Most of the work will be checking the time and comparing the difference between check in the last check in time and the current time.
