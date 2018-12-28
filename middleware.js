@@ -13,14 +13,16 @@ checkForBlankNames = (req, res, next) => {
 
 
 checkUnique = (req, res, next) => {
-  // db('tamagotchis').where('username', req.body.username)
-  //   .then(thing => {
-  //     if(thing === []) {
-  //       next()
-  //     } else {
-  //       res.status(401).json({msg: "That username already exists"})
-  //     }
-  //   } )
+  // const {username, tamagotchi_name} = req.body
+  // db('tamagotchis').where('username', username)
+  // .then(name => {
+  //   if(name === []) {
+  //     next()
+  //   } else {
+  //     res.status(401).json({msg: "This username already exists"})
+  //   }
+  // })
+
   next()
 }
 

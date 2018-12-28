@@ -18,25 +18,29 @@ server.get('/', (req, res) => {
 
 server.get('/status', (req, res) => {
   const {tamagotchi_name, username} = req.body
-  res.status(200).json({})
+    console.log(req.body)
+  db('tamagotchis').where('tamagotchi_name', tamagotchi_name)
+  .then(tamagotchi => {
+    const gotchi = tamagotchi[0]
+    console.log('from the DB', tamagotchi)
+    res.status(200).json({tamagotchi_name: gotchi.tamagotchi_name, 
+      username: gotchi.username,
+      health: 4,
+      happiness: 4,
+      messy: false,
+      asleep: false,
+      discipline: 12,
+      })
+  })
+  .catch(err => res.status(500).json({msg: 'Cannot get tamagotchi at this time', err}))
 })
 
 server.post('/create', checkForBlankNames, checkUnique,  (req, res) => {
   const {tamagotchi_name, username} = req.body
-      db('tamagotchis').where('username', req.body.username)
-      .then(name => {
-        if(name === []) {
           const ts = new Date
           db('tamagotchis').insert({tamagotchi_name: tamagotchi_name, username: username, date_created: ts, last_check_in: ts})
             .then(id => res.status(201).json(id))
             .catch(err => res.status(500).json({msg: 'cannot create tamagotchi', err}))
-
-          console.log(name)
-        } else {
-          res.status(401).json({msg: "This username already exists"})
-        }
-
-      })
 })
 
 module.exports = server;
