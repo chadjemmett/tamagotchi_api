@@ -19,6 +19,12 @@ describe('/create POST request', () => {
   it('should return the id of the new resource ', async () => {
     let response = await request(server).post('/create')
       .send({tamagotchi_name: 'foo', username: 'bar'})
-    expect(response.body).toBe([1])
+    expect(response.body[0]).toBe(1)
+  })
+
+  it('should return 401 if no username or name ', async () => {
+    let response = await request(server).post('/create')
+      .send({tamagotchi_name: '', username: ''})
+    expect(response.status).toBe(401)
   })
 })
