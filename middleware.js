@@ -11,6 +11,16 @@ checkForBlankNames = (req, res, next) => {
     }
 }
 
+updateStatus = (req, res, next) => {
+  const {tamagotchi_name, username, timeStamp} = req.body
+
+
+
+
+
+
+}
+
 
 checkUnique = (req, res, next) => {
   // const {username, tamagotchi_name} = req.body

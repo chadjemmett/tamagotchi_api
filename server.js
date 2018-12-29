@@ -17,20 +17,15 @@ server.get('/', (req, res) => {
 
 
 server.get('/status', (req, res) => {
-  const {tamagotchi_name, username} = req.body
+  const {tamagotchi_name, username, timeStamp} = req.body
     console.log(req.body)
   db('tamagotchis').where('tamagotchi_name', tamagotchi_name)
   .then(tamagotchi => {
     const gotchi = tamagotchi[0]
-    console.log('from the DB', tamagotchi)
-    res.status(200).json({tamagotchi_name: gotchi.tamagotchi_name, 
-      username: gotchi.username,
-      health: 4,
-      happiness: 4,
-      messy: false,
-      asleep: false,
-      discipline: 12,
+      res.status(200).json({
+        timeElapsed: timeStamp - gotchi.date_created
       })
+
   })
   .catch(err => res.status(500).json({msg: 'Cannot get tamagotchi at this time', err}))
 })
